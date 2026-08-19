@@ -18,7 +18,9 @@ on:
 env:
   OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
   OLLAMA_BASE_URL: ${{ secrets.OLLAMA_BASE_URL }}
-  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+  OPENAI_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
+  OPENAI_BASE_URL: ${{ secrets.OLLAMA_BASE_URL }}
+  DEEPEVAL_EVALUATOR_MODEL: ${{ secrets.DEEPEVAL_EVALUATOR_MODEL }}
 
 jobs:
   deepeval:

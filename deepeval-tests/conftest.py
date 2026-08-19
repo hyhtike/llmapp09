@@ -2,9 +2,16 @@
 Shared fixtures and configuration for deepeval LLM evaluation tests.
 """
 
+import os
 import pytest
 from deepeval.metrics import GEval
 from deepeval.test_case import LLMTestCaseParams
+
+# Model used as the DeepEval evaluation judge.
+# Defaults to gpt-4o (OpenAI) but can be overridden via the
+# DEEPEVAL_EVALUATOR_MODEL environment variable to point to any
+# OpenAI-compatible endpoint (e.g. an Ollama-hosted model).
+_EVALUATOR_MODEL: str = os.getenv("DEEPEVAL_EVALUATOR_MODEL", "gpt-4o") or "gpt-4o"
 
 
 # ---------------------------------------------------------------------------
@@ -25,6 +32,7 @@ def json_schema_metric(schema_description: str):
             LLMTestCaseParams.ACTUAL_OUTPUT,
         ],
         threshold=0.5,
+        model=_EVALUATOR_MODEL,
     )
 
 
@@ -42,6 +50,7 @@ def output_correctness_metric():
             LLMTestCaseParams.ACTUAL_OUTPUT,
         ],
         threshold=0.5,
+        model=_EVALUATOR_MODEL,
     )
 
 
@@ -64,4 +73,5 @@ def answer_relevancy_metric():
             LLMTestCaseParams.ACTUAL_OUTPUT,
         ],
         threshold=0.5,
+        model=_EVALUATOR_MODEL,
     )
